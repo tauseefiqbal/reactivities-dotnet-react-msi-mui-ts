@@ -10,7 +10,8 @@ export default defineConfig({
     emptyOutDir: true
   },
   server: {
-    port: 3000
+    port: 5173,
+    host: '127.0.0.1'
   },
   plugins: [react(), mkcert()],
 })
