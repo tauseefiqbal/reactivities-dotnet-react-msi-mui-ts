@@ -27,6 +27,14 @@ jobs:
         run: npm ci
         working-directory: client
 
+      - name: Create production env file
+        run: |
+          echo "VITE_API_URL=/api" >> .env.production
+          echo "VITE_COMMENT_URL=/comments" >> .env.production
+          echo "VITE_GITHUB_CLIENT_ID=Ov23lio5ka7NaNTownQM" >> .env.production
+          echo "VITE_REDIRECT_URI=https://reactivities-wa.azurewebsites.net/auth-callback" >> .env.production
+        working-directory: client
+
       - name: Build client
         run: npm run build
         working-directory: client
