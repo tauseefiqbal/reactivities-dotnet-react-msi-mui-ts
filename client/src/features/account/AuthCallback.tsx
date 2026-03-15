@@ -18,7 +18,7 @@ export default function AuthCallback() {
 
         fetchGithubToken.mutateAsync(code)
             .then(() => navigate('/activities'))
-            .catch((error) => {
+            .catch(() => {
                 // Error already handled by axios interceptor
                 setLoading(false);
             })
