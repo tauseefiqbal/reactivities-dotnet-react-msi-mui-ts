@@ -102,7 +102,8 @@ export const useActivities = (id?: string) => {
         mutationFn: async (id: string) => {
             await agent.post(`/activities/${id}/attend`);
         },
-        onMutate: async (activityId: string) => {
+ZsD
+``        onMutate: async (activityId: string) => {
             await queryClient.cancelQueries({ queryKey: ['activities', activityId] });
 
             const prevActivity = queryClient.getQueryData<Activity>(['activities', activityId]);
@@ -132,7 +133,7 @@ export const useActivities = (id?: string) => {
 
             return { prevActivity };
         },
-        onError: (error, activityId, context) => {
+        onError: (_error, activityId, context) => {
             if (context?.prevActivity) {
                 queryClient.setQueryData(['activities', activityId], context.prevActivity);
             }
