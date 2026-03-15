@@ -1,9 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - reactivities-2026
+name: Build and deploy ASP.Net Core app to Azure Web App - reactivities-wa
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -15,21 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install deps and build react app
-        run: |
-          cd client
-          npm install
-          npm run build
-
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 'v10.0'
+          dotnet-version: '9.x'
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
@@ -59,15 +51,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1A2F8556C4FA409896BCD31C24CB34D0 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2AE992858C7B495482AEE14C42C7CA60 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E0C01468A7134CC2AF3CA0554093DF4E }}
-          
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9A079A54628149538E74471F262C9BC4 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D7EA78CCB71D444D89E4EFAB3DAC6657 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_43219B9689564A34AA6701BE6DE64C72 }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'reactivities-2026'
+          app-name: 'reactivities-wa'
           slot-name: 'Production'
           package: .
           
